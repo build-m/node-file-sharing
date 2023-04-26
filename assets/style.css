@@ -4,3 +4,55 @@
     box-sizing: border-box;
     font-family: sans-serif;
 }
+body {
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    align-items: center;
+    background-image: url("bkg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.wrapper {
+    width: 500px;
+    background: rgb(206, 204, 219);
+    padding: 20px;
+    border-radius: 5px;
+    opacity: 0.8;
+}
+
+.wrapper h2 {
+    text-align: center;
+    color: rgb(68, 66, 66);
+    text-shadow: 0 0 0 black;
+    margin-bottom: 10px;
+}
+
+button {
+    display: flex;
+    background-color: rgb(47, 214, 55);
+    font-size: 20px;
+    color: white;
+    padding: 7px 30px;
+    margin: auto;
+    margin-top: 19px;
+    border-radius: 7px;
+    border: 1px solid rgb(14, 97, 49);
+    cursor: pointer;
+}
+button:hover {
+    background-color: rgb(35, 156, 41);
+}
+
+/* form{
+    border: 2px dashed rgb(109, 87, 172);
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+#file {
+    opacity: 0;
+    width: 0;
+}
