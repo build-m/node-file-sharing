@@ -56,3 +56,33 @@ button:hover {
     opacity: 0;
     width: 0;
 }
+
+form .brder {
+    border: 2px dashed rgb(109, 87, 172);
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form i {
+    font-size: 60px;
+    color: rgb(120, 202, 38);
+}
+
+.upload-file {
+    display: flex;
+    padding: 10px 0;
+    font-size: 16px;
+}
+
+.upload-file i {
+    color: brown;
+    text-shadow: 0 0 0 black;
+    font-size: 35px;
+    margin-right: 10px;
+}
+
+.content {
+    width: 100%;
+}
