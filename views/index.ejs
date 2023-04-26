@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+    <title>File share</title>
+</head>
+<body>
+    <!-- <% if (locals.fileLink != null) { %>
+        <div>
+            File uploaded on
+            <a href="<%= locals.fileLink %>"><%= locals.fileLink %></a>
+        </div>
+    <% } %> -->
+    <!-- <form action="/upload" method="post" enctype="multipart/form-data">
+        <label for="file">File: </label>
+        <input type="file" id="file" name="file" required> <br><br>
+        <label for="password">Password: </label>
+        <input type="password" id="password" name="password">
+        <button type="submit">Share</button>
+    </form> -->
+   
+
+    <div class="wrapper">
+        <h2>Browse files to upload</h2>
+        <form action="/upload" method="post" id="form" enctype="multipart/form-data"> 
+            <div class="brder">
+                <input type="file" id="file" name="file" required>
+                <label for="file"> <i class="fa fa-cloud-upload" aria-hidden="true"></i> </label>
+            </div>         
+            <!-- <input type="file" id="file" hidden>
+            <label for="file"> <i class="fa fa-cloud-upload" aria-hidden="true"></i> </label> -->
+        <!-- </form> -->
+       
+          
+        <div class="uploaded" >
+            <div class="upload-file" id="upload">
+                <!-- <i class="fa fa-file-alt" aria-hidden="true"></i> -->
+                <div class="content">
+                    <div>
+                        <span id="filename"></span>
+                        <!-- <i class="fas fa-check"></i> -->
+                    </div>          
+                   <div class="size" id="fsize"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="progress-bar">
+            <progress value="50" max="100"></progress>&nbsp;
+            <label for="progress">0%</label>
+        </div> -->
+        
+                                  <!-- password-input -->
+        <div class="pass" id="pass">
+            <!-- <p>Make it password-protected(optional)?</p>
+            <input type="password" id="password" name="password"> -->
+        </div>
+
+        <button type="submit">upload</button> <br>
+
+
+        <% if (locals.fileLink !=null) { %>
+            <div>
+                File uploaded on the below link
+                <a href="<%= locals.fileLink %>">
+                    <%= locals.fileLink %>
+                </a>
+            </div>
+            <% } %>
+    
+</form>
+
+</div>
+
+</body>
+<script>
+       
+        const form = document.querySelector("#form")
+        const inputFile = document.querySelector("#file")
+        const uploaded = document.querySelector(".uploaded") 
+        document.addEventListener('contextmenu', event => event.preventDefault());
+  
+        inputFile.onchange = e => {
+            // console.log(e.target.files)
+            if(document.getElementById("icon")){
+               var rmv = document.getElementById("icon");             
+               rmv.remove(); // console.log("redudndunt icon insertion removed")                           
+            }
+           if(document.getElementById("palert") && document.getElementById("password")){
+                 var passalertrmv = document.getElementById("palert");
+                 const pass = document.getElementById("password");
+                 passalertrmv.remove();
+                 pass.remove();                  
+            }
+              
+            const filename = e.target.files[0].name
+            const filesize = e.target.files[0].size
+            console.log(filename)
+            console.log(filesize)
+
+            const fname = document.getElementById("filename")
+            const fsize = document.getElementById("fsize")
+            const parentnode = document.getElementById("upload")
+            
+            const ficon = document.createElement("i");
+            ficon.setAttribute('class', 'fa fa-file-alt')
+            ficon.setAttribute('id', 'icon')
+
+            parentnode.insertBefore(ficon, parentnode.firstChild)
+
+
+            const passalert = document.getElementById("pass")
+            const pass = document.createElement("p");
+            pass.innerHTML = "Make it password-protected(optional)?"
+            const input = document.createElement('input')
+            pass.setAttribute('class','pass')
+            pass.setAttribute('id', 'palert')
+            input.setAttribute('id', 'password')
+            input.setAttribute('name', 'password')
+            input.type = 'password'
+
+            passalert.insertBefore(pass, passalert.firstChild)
+            passalert.insertBefore(input, passalert.secondChild)
+
+            fname.textContent = filename;
+            const originsize = filesize / 1024;
+            const round = originsize.toFixed(2)
+            fsize.textContent = round + 'kb';           
+        }
+</script>
+</html>
