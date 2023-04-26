@@ -86,3 +86,57 @@ form i {
 .content {
     width: 100%;
 }
+
+.content div {
+    display: flex;
+}
+
+.content div span:first-child {
+    flex-grow: 1;
+}
+
+.uploaded {
+    max-height: 220px;
+    overflow-y: auto;
+}
+
+.uploaded .content i {
+    font-size: 20px;
+}
+
+.uploaded .size {
+    font-size: 12px;
+}
+
+/* .uploaded::-webkit-scrollbar{
+    width: 0;
+} */
+label {
+    cursor: pointer;
+}
+
+.pass input {
+    display: block;
+    margin: 5px auto;
+    padding: 3px;
+    border-radius: 10px;
+}
+
+.pass p {
+    text-align: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    color: rgb(233, 25, 25);
+    padding-top: 15px;
+}
+
+.pass h5 {
+    text-align: center;
+    color: brown;
+    padding-top: 10px;
+}
+
+progress {
+    appearance: none;
+    height: 10px;
+}
