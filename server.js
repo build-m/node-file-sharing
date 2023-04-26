@@ -1,18 +1,18 @@
 require("dotenv").config()
 const express = require('express')
-const multer = require('multer'); // file upload middleware
+const multer = require('multer'); 
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const File = require('./models/File')
 const app = express() 
 app.use(express.urlencoded({ extended: true }))
-app.use(express.static(__dirname + '/assets'));//style for index.ejs
-app.use('/assets', express.static('assets'))////style for passdown.ejs
+app.use(express.static(__dirname + '/assets'));
+app.use('/assets', express.static('assets'))
 
 const upload = multer({dest: "uploads"})
 
-mongoose.set('strictQuery', true);// to avoid depreciation warning
-mongoose.connect(process.env.DATABASE_URL)
+mongoose.set('strictQuery', true);
+mongoose.connect("mongodb+srv://godolyas123:fileshare12@cluster0.pvi9gro.mongodb.net/?retryWrites=true&w=majority")
 
 //db connection check-up
 const conn = mongoose.connection;
@@ -41,43 +41,10 @@ app.post("/upload" , upload.single("file") , async (req,res) =>{
     fileData.password = await bcrypt.hash(req.body.password,10)
   }
 
-  //create() method of the Mongoose API (below) is used to create single or many documents in the collection. Mongoose by default triggers save() internally when we use the create() method on any model.
   const file = await File.create(fileData)
   res.render("index", {fileLink: `${req.headers.origin}/file/${file.id}`}) //grab url that caused the request
 })
 
-// app.get("/file/:id", async (req, res) =>{
-//     //res.send(req.params.id)
-//     const file = await File.findById(req.params.id)
-
-
-//     if (file.password != null) {
-//     if (req.body.password == null) {
-//       res.render("passdown")
-//       return
-//     }
-
-//     if (!(await bcrypt.compare(req.body.password, file.password))) {
-//       res.render("passdown", { error: true })
-//       return
-//     }
-//   }
-
-
-//     file.downloadCount++ 
-//     await file.save()
-//     console.log(file.downloadCount)
-//     //console.log(file.path)
-//     //console.log(file.originalName)
-//     res.download(file.path, file.originalName, (error) =>{
-//           console.log("Error : ", error)
-//     })
-// })
-
-
-//app.get("/file/:id", handleDownload)
-//app.post("/file/:id", handleDownload)
-//the above code(get & post) can be shortened as the following:
 
 app.route("/file/:id").get(handleDownload).post(handleDownload)
 
@@ -108,4 +75,4 @@ async function handleDownload(req, res) {
 }
  
 
-app.listen(process.env.PORT) 
+app.listen(3000 || 5000) 
